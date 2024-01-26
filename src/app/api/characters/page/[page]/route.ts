@@ -8,13 +8,20 @@ type Props = {
   };
 };
 
+// export default async function handler(
+//   req: Request,
+//   resp: Response,
+//   { params: { page } }: Props
+// ) {
 export async function GET(req: Request, { params: { page } }: Props) {
+  let response;
   const res: Response = await fetch(
     `${process.env.DATA_SOURCE_URL}/character/?page=${page}`
   );
   const characterData = await res.json();
+
   if (characterData.error) {
-    return NextResponse.json({
+    response = NextResponse.json({
       error: {
         status: "No Data here!",
         statusCode: 404,
@@ -36,7 +43,7 @@ export async function GET(req: Request, { params: { page } }: Props) {
     }
   );
 
-  return NextResponse.json({
+  response = NextResponse.json({
     data: {
       info: {
         prev: characterData.info.prev,
@@ -46,11 +53,9 @@ export async function GET(req: Request, { params: { page } }: Props) {
     },
   });
 
-  // return NextResponse.json({
-  //   error: {
-  //     status: "PageNotFound",
-  //     statusCode: 404,
-  //     message: "api did not return information",
-  //   },
-  // });
+  // const response = NextResponse.json(data)
+
+  response.headers.set("Access-Control-Allow-Credentials", "true");
+  response.headers.set("Access-Control-Allow-Origin", "*");
+  return response;
 }
