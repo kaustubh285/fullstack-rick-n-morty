@@ -20,7 +20,6 @@ async function getLocationData(locationURL: string): Promise<ILocation> {
 
   const locationData: ILocationApiData = await locationRes.json();
 
-  console.log(locationData);
   return {
     id: locationData.id,
     name: locationData.name,
@@ -62,13 +61,16 @@ export async function GET(req: Request, { params: { charId } }: Props) {
   const originData: ILocation = await getLocationData(characterData.origin.url);
   const episodeData: IEpisode[] = await getEpisodeData(characterData);
 
-  delete characterData.episode;
   const finalData: ICharacter = {
-    ...characterData,
+    id: characterData.id,
+    name: characterData.name,
+    status: characterData.status,
+    species: characterData.species,
+    gender: characterData.gender,
+    avatar: characterData.avatar,
     origin: originData,
     episodes: episodeData,
     location: locationData,
   };
-  // console.log(completeData);
   return NextResponse.json(finalData);
 }

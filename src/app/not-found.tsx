@@ -1,8 +1,8 @@
-import HomePage from "@/components/HomePage";
-import { TaskIntro } from "@/components/organisms/TaskIntro";
+import Error from "@/components/Error";
 import Image from "next/image";
+import React from "react";
 
-export default function Home() {
+const NotFound = () => {
   return (
     <main className='text-center flex flex-col items-center justify-start gap-5 overflow-hidden h-screen'>
       <Image
@@ -12,8 +12,14 @@ export default function Home() {
         height={200}
         className=' bg-gray-200 w-full h-64 object-cover absolute top-0 left-0 right-0 bottom-56 z-0  opacity-40'
       />
-      <HomePage />
-      {/* <TaskIntro /> */}
+      <div className='flex flex-col z-50 overflow-scroll w-screen pt-24 space-y-12 md:px-20 px-3 pb-30'>
+        <div>
+          <p className='text-4xl font-semibold'>Rick and Morty</p>
+        </div>
+        <Error message={"Page does not exist!"} />
+      </div>
     </main>
   );
-}
+};
+
+export default NotFound;

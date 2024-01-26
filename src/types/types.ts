@@ -29,7 +29,7 @@ export interface IEpisode {
   episode: string;
 }
 
-// EXTRAS
+// *** EXTRAS ***
 export interface Place {
   name: string;
   url: string;
@@ -38,7 +38,8 @@ export interface Place {
 export interface ICharacterComplete extends ICharacterCore {
   location: Place;
   origin: Place;
-  episode?: string[];
+  episode: string[];
+  image?: string;
 }
 
 export interface ILocationApiData {
@@ -47,4 +48,19 @@ export interface ILocationApiData {
   type: string;
   residents: [];
   dimension: string;
+}
+
+export interface PageData {
+  data?: {
+    characters: ICharacterCore[];
+    info: {
+      next: string;
+      prev: string;
+    };
+  };
+  error?: {
+    status: string;
+    statusCode: number;
+    message: string;
+  };
 }
