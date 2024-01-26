@@ -1,21 +1,70 @@
-import React from "react";
-import mockData from "../../mockdata/allCharacters.json";
-import { ICharacterCore } from "@/types/types";
-import CharacterBlock from "./organisms/CharacterBlock";
-const HomePage = () => {
-  const newData: ICharacterCore[] = [];
+"use client";
 
-  mockData.data.forEach((char) => newData.push(char));
+import React, { Suspense, useEffect } from "react";
+import mockData from "../../mockdata/allCharacters.json";
+import { ICharacterCore, PageData } from "@/types/types";
+import CharacterBlock from "./organisms/CharacterBlock";
+import Paginator from "./Paginator";
+import GridSkeleton from "./Loading/GridSkeleton";
+import { useSearchParams } from "next/navigation";
+import Error from "./Error";
+const HomePage = () => {
+  const [loading, setLoading] = React.useState<boolean>(true);
+  const [error, setError] = React.useState<string>("");
+  const searchParams = useSearchParams();
+  const currentPageParam = searchParams.get("page");
+  const currentPage = currentPageParam ? parseInt(currentPageParam) : 1;
+  const [pageData, setPageData] = React.useState<
+    PageData | { data: undefined; error: undefined }
+  >({
+    data: undefined,
+    error: undefined,
+  });
+
+  useEffect(() => {
+    fetchPageData(currentPage);
+  }, [currentPage]);
+
+  const fetchPageData = async (page: number) => {
+    setLoading(true);
+    const data = await fetch(`/api/characters/page/${page}`).then((res) =>
+      res.json()
+    );
+    if (data.error) {
+      setError(data.error.message);
+    } else {
+      setPageData(data);
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className='flex flex-col z-50 overflow-scroll w-screen pt-24 space-y-12 md:px-20 px-3'>
+    <div className='flex flex-col z-50 overflow-scroll w-screen pt-24 space-y-12 md:px-20 px-3 pb-30'>
       <div>
         <p className='text-4xl font-semibold'>Rick and Morty</p>
       </div>
-      <div className='grid grid-cols-2 gap-4 md:grid-cols-5 md:gap-1'>
-        {newData.map((char: ICharacterCore) => (
-          <CharacterBlock char={char} key={char.id} />
-        ))}
-      </div>
+      {error && <Error message={error} />}
+      {!error && (
+        <>
+          {loading && <GridSkeleton />}
+          {!loading && (
+            <div className='grid grid-cols-2 gap-4 md:grid-cols-5 md:gap-1'>
+              {pageData.data?.characters.map((char: ICharacterCore) => (
+                <Suspense fallback={<div>wait...</div>} key={char.id}>
+                  <CharacterBlock char={char} />
+                </Suspense>
+              ))}
+            </div>
+          )}
+          {!loading && (
+            <Paginator
+              prev={pageData.data?.info.prev ?? null}
+              next={pageData.data?.info.next ?? null}
+              currentPage={currentPage}
+            />
+          )}
+        </>
+      )}
     </div>
   );
 };

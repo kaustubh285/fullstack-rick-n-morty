@@ -12,7 +12,7 @@ const CharacterBlock = ({ char }: Props) => {
     <div
       className='flex flex-col items-start justify-start text-wrap space-y-3 pb-3 md:pb-9 '
       key={char.id}>
-      <div className=' bg-red-300'>
+      <div className=' bg-gray-300'>
         <Image
           src={char.avatar}
           alt={char.name}
