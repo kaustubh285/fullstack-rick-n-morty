@@ -7,17 +7,6 @@ export interface ICharacterCore {
   avatar: string;
 }
 
-export interface Place {
-  name: string;
-  url: string;
-}
-
-export interface ICharacterComplete extends ICharacterCore {
-  location: Place;
-  origin: Place;
-  episode: string[];
-}
-
 export interface ICharacter extends ICharacterCore {
   origin: ILocation;
   location: ILocation;
@@ -38,4 +27,24 @@ export interface IEpisode {
   airDate: string;
   noOfCharacters: number;
   episode: string;
+}
+
+// EXTRAS
+export interface Place {
+  name: string;
+  url: string;
+}
+
+export interface ICharacterComplete extends ICharacterCore {
+  location: Place;
+  origin: Place;
+  episode?: string[];
+}
+
+export interface ILocationApiData {
+  id: number;
+  name: string;
+  type: string;
+  residents: [];
+  dimension: string;
 }

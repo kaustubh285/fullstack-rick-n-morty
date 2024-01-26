@@ -1,5 +1,5 @@
 import { ICharacterCore } from "@/types/types";
-import { NextApiRequest, NextApiResponse } from "next";
+
 import { NextResponse } from "next/server";
 
 type Props = {
