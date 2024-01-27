@@ -54,6 +54,7 @@ export interface PageData {
   data?: {
     characters: ICharacterCore[];
     info: {
+      pages: number;
       next: string;
       prev: string;
     };

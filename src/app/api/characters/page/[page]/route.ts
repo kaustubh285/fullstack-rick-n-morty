@@ -20,6 +20,7 @@ export async function GET(req: Request, { params: { page } }: Props) {
   );
   const characterData = await res.json();
 
+  console.log(characterData.error);
   if (characterData.error) {
     response = NextResponse.json({
       error: {
@@ -28,6 +29,10 @@ export async function GET(req: Request, { params: { page } }: Props) {
         message: characterData.error,
       },
     });
+
+    response.headers.set("Access-Control-Allow-Credentials", "true");
+    response.headers.set("Access-Control-Allow-Origin", "*");
+    return response;
   }
 
   const completePageData: ICharacterCore[] = characterData.results.map(
@@ -46,15 +51,13 @@ export async function GET(req: Request, { params: { page } }: Props) {
   response = NextResponse.json({
     data: {
       info: {
+        pages: characterData.info.pages,
         prev: characterData.info.prev,
         next: characterData.info.next,
       },
       characters: completePageData,
     },
   });
-
-  // const response = NextResponse.json(data)
-
   response.headers.set("Access-Control-Allow-Credentials", "true");
   response.headers.set("Access-Control-Allow-Origin", "*");
   return response;

@@ -16,6 +16,15 @@ type Props = {
 };
 
 async function getLocationData(locationURL: string): Promise<ILocation> {
+  if (locationURL.length === 0 || locationURL === "") {
+    return {
+      id: 0,
+      name: "Unknown",
+      type: "Unknown",
+      dimension: "Unknown",
+      noOfResidents: 0,
+    };
+  }
   const locationRes: Response = await fetch(`${locationURL}`);
 
   const locationData: ILocationApiData = await locationRes.json();
@@ -55,10 +64,17 @@ export async function GET(req: Request, { params: { charId } }: Props) {
     `${process.env.DATA_SOURCE_URL}/character/${charId}`
   );
   const characterData: ICharacterComplete = await res.json();
+  console.log("GOT CHARACTER DATA");
+
   const locationData: ILocation = await getLocationData(
     characterData.location.url
   );
+  console.log("____________GOT LOCATION DATA__________");
+  console.log("****************");
+  console.log(characterData.origin.url);
   const originData: ILocation = await getLocationData(characterData.origin.url);
+  console.log("____________GOT ORIGIN DATA__________");
+  console.log(originData);
   const episodeData: IEpisode[] = await getEpisodeData(characterData);
 
   const finalData: ICharacter = {
@@ -67,7 +83,7 @@ export async function GET(req: Request, { params: { charId } }: Props) {
     status: characterData.status,
     species: characterData.species,
     gender: characterData.gender,
-    avatar: characterData.avatar,
+    avatar: characterData.image || "",
     origin: originData,
     episodes: episodeData,
     location: locationData,
