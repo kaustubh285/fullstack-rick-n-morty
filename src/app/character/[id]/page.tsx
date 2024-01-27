@@ -14,7 +14,7 @@ type Props = {
 
 const page = async ({ params: { id }, searchParams: { source } }: Props) => {
   const characterDataRes = await fetch(
-    process.env.URL + `/api/characters/${id}`
+    `https://` + process.env.VERCEL_URL + `/api/characters/${id}`
   );
 
   const characterData = await characterDataRes.json();
