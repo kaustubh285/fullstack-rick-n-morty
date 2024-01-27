@@ -51,7 +51,7 @@ const HomePage = () => {
             <div className='grid grid-cols-2 gap-4 md:grid-cols-5 md:gap-1'>
               {pageData.data?.characters.map((char: ICharacterCore) => (
                 <Suspense fallback={<div>wait...</div>} key={char.id}>
-                  <CharacterBlock char={char} />
+                  <CharacterBlock char={char} currentPage={currentPage} />
                 </Suspense>
               ))}
             </div>

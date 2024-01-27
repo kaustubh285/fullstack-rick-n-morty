@@ -55,6 +55,7 @@ export async function GET(req: Request, { params: { charId } }: Props) {
     `${process.env.DATA_SOURCE_URL}/character/${charId}`
   );
   const characterData: ICharacterComplete = await res.json();
+  console.log("GOT CHARACTER DATA");
   const locationData: ILocation = await getLocationData(
     characterData.location.url
   );
@@ -67,7 +68,7 @@ export async function GET(req: Request, { params: { charId } }: Props) {
     status: characterData.status,
     species: characterData.species,
     gender: characterData.gender,
-    avatar: characterData.avatar,
+    avatar: characterData.image || "",
     origin: originData,
     episodes: episodeData,
     location: locationData,
