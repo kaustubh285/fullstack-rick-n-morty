@@ -30,6 +30,7 @@ const Paginator = ({ info, currentPage }: Props) => {
     <>
       <div className=" flex justify-evenly items-center md:w-3/12 w-4/6 mx-auto">
         <Link
+          prefetch={true}
           href={`/?page=${currentPage - 1}`}
           className={
             (info?.prev == null && `pointer-events-none bg-slate-500`) +
@@ -40,6 +41,7 @@ const Paginator = ({ info, currentPage }: Props) => {
         </Link>
         <div>{currentPage}</div>
         <Link
+          prefetch={true}
           href={`/?page=${currentPage + 1}`}
           // disabled={next == null}
           className={
