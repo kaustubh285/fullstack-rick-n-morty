@@ -19,11 +19,11 @@ const CharacterBlock = ({ char, currentPage }: Props) => {
           alt={char.name}
           width={200}
           height={200}
-          className='w-100'
+          className='w-100 rounded-md '
         />
       </div>
-      <div className='flex justify-start items-start flex-col text-nowrap md:text-pretty text-sm md:text-md font-medium text-left h-3/6'>
-        <p>Name: {char.name}</p>
+      <div className='flex justify-start items-start flex-col text-nowrap md:text-pretty text-sm md:text-md font-medium text-left h-3/6 w-3/4 text-shadow'>
+        <p className=' '>Name: {char.name}</p>
         <p>Gender: {char.gender}</p>
         <p>Species: {char.species}</p>
       </div>
