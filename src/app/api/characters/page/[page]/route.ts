@@ -16,11 +16,10 @@ type Props = {
 export async function GET(req: Request, { params: { page } }: Props) {
   let response;
   const res: Response = await fetch(
-    `${process.env.DATA_SOURCE_URL}/character/?page=${page}`
+    `${process.env.DATA_SOURCE_URL}/character/?page=${page}&name=morty&status=alive`
   );
   const characterData = await res.json();
 
-  console.log(characterData.error);
   if (characterData.error) {
     response = NextResponse.json({
       error: {
