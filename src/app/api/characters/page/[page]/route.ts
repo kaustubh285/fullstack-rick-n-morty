@@ -51,6 +51,7 @@ export async function GET(req: Request, { params: { page } }: Props) {
   response = NextResponse.json({
     data: {
       info: {
+        pages: characterData.info.pages,
         prev: characterData.info.prev,
         next: characterData.info.next,
       },

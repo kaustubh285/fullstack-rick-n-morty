@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -6,6 +7,7 @@ type Props = {
   message: string;
 };
 const Error = ({ message }: Props) => {
+  let defaultPage = 1;
   return (
     <div className=' flex flex-col justify-center items-center'>
       <Image
@@ -21,9 +23,11 @@ const Error = ({ message }: Props) => {
       </p>
 
       <div className=' py-2'>
-        <Link href='/?page=1' className='text-lg underline'>
+        <p
+          onClick={() => (window.location.href = "/?page=1")}
+          className='text-lg underline cursor-pointer '>
           Head back to square 1?
-        </Link>
+        </p>
       </div>
     </div>
   );

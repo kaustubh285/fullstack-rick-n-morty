@@ -10,7 +10,7 @@ type Props = {
 };
 const CharacterPage = ({ characterData, source }: Props) => {
   return (
-    <div className='z-50 p-5 md:px-10 w-full overflow-y-scroll'>
+    <div className='z-50 p-5 md:px-10 w-full overflow-y-scroll '>
       <div className=' text-center md:text-left space-y-2 pb-16'>
         <p className=' text-4xl font-semibold'>Rick and Morty</p>
 
@@ -22,7 +22,7 @@ const CharacterPage = ({ characterData, source }: Props) => {
         </Link>
       </div>
 
-      <div className='flex flex-col space-y-6 md:flex-row md:space-x-6 md:space-y-0 md:px-9 pb-10 md:pb-20 pt-5'>
+      <div className='flex flex-col space-y-6 md:flex-row md:space-x-6 md:space-y-0 md:px-9 pb-10 md:pb-20 pt-5 text-shadow '>
         <Image
           src={characterData.avatar}
           alt={""}
@@ -31,13 +31,17 @@ const CharacterPage = ({ characterData, source }: Props) => {
           className=' w-4/5 mx-auto md:mx-0 md:w-56 rounded-full bg-gray-300'
         />
         <div className='text-center md:text-left md:pt-5'>
-          <p className='text-5xl font-semibold pb-4'>{characterData.name}</p>
-          <p className='text-2xl '>Status: {characterData.status}</p>
-          <p className='text-2xl '>Origin: {characterData.origin.name}</p>
+          <p className='text-5xl font-semibold pb-4 text-shadow'>
+            {characterData.name}
+          </p>
+          <p className='text-2xl text-shadow'>Status: {characterData.status}</p>
+          <p className='text-2xl text-shadow'>
+            Origin: {characterData.origin.name}
+          </p>
         </div>
       </div>
 
-      <div className=' pb-10 text-left'>
+      <div className=' pb-10 text-left text-shadow '>
         <p className='text-2xl font-semibold pb-4 text-center md:text-left'>
           Location Details:
         </p>
@@ -46,18 +50,25 @@ const CharacterPage = ({ characterData, source }: Props) => {
         <p className='text-md'>Type: {characterData.location.type}</p>
         <p className='text-md'>Dimension: {characterData.location.dimension}</p>
         <p className='text-md'>
-          No of Residents: {characterData.location.noOfResidents}
+          No of Residents:{" "}
+          {characterData.location.noOfResidents === 0
+            ? "Unknown"
+            : characterData.location.noOfResidents}
         </p>
       </div>
 
-      <div className=' pb-10 text-left'>
+      <div className=' pb-10 text-left text-shadow '>
         <p className='text-2xl font-semibold pb-4 text-center md:text-left'>
-          Episode Details:
+          Episode Details{" "}
+          <span className=' text-sm pt-3 font-normal'>
+            ({characterData.episodes.length})
+          </span>{" "}
+          :
         </p>
 
         <p className='text-md'>
-          First Appearance: {characterData.episodes[0].name} {"/"}
-          {characterData.episodes[0].episode}
+          First Appearance: {characterData.episodes[0].episode} -{" "}
+          {characterData.episodes[0].name}
         </p>
         <p className='text-md'>
           First Appearance Date: {characterData.episodes[0].airDate}
@@ -68,8 +79,8 @@ const CharacterPage = ({ characterData, source }: Props) => {
         </p>
         <p className='text-md'>
           Last Appearance:{" "}
-          {characterData.episodes[characterData.episodes.length - 1].name} {"/"}
-          {characterData.episodes[characterData.episodes.length - 1].episode}
+          {characterData.episodes[characterData.episodes.length - 1].episode} -{" "}
+          {characterData.episodes[characterData.episodes.length - 1].name}
         </p>
         <p className='text-md'>
           Last Appearance Date:{" "}

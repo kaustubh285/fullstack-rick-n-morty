@@ -57,11 +57,7 @@ const HomePage = () => {
             </div>
           )}
           {!loading && (
-            <Paginator
-              prev={pageData.data?.info.prev ?? null}
-              next={pageData.data?.info.next ?? null}
-              currentPage={currentPage}
-            />
+            <Paginator info={pageData.data?.info} currentPage={currentPage} />
           )}
         </>
       )}

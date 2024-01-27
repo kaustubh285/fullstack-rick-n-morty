@@ -1,5 +1,5 @@
 import HomePage from "@/components/HomePage";
-import { TaskIntro } from "@/components/organisms/TaskIntro";
+
 import Image from "next/image";
 
 export default function Home() {
@@ -13,7 +13,6 @@ export default function Home() {
         className=' bg-gray-200 w-full h-64 object-cover absolute top-0 left-0 right-0 bottom-56 z-0  opacity-40'
       />
       <HomePage />
-      {/* <TaskIntro /> */}
     </main>
   );
 }
