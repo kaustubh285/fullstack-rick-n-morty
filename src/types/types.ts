@@ -65,3 +65,14 @@ export interface PageData {
     message: string;
   };
 }
+
+export interface CharacterPageData {
+  data?: {
+    characterData: ICharacter;
+  };
+  error?: {
+    status: string;
+    statusCode: number;
+    message: string;
+  };
+}
