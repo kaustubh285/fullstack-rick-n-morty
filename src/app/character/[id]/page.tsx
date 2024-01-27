@@ -14,7 +14,7 @@ type Props = {
 
 const page = async ({ params: { id }, searchParams: { source } }: Props) => {
   const characterDataRes = await fetch(
-    `https://` + process.env.VERCEL_URL + `/api/characters/${id}`
+    `https://fullstack-rick-n-morty.vercel.app/api/characters/${id}`
   );
 
   const characterData = await characterDataRes.json();
