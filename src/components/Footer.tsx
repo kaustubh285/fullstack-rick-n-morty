@@ -3,12 +3,12 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="flex flex-col md:flex-row py-3 bg-gray-200 px-5 justify-between items-center text-left md:text-right">
+    <div className="flex flex-col space-y-3 md:space-y-0 py-3 bg-gray-200 px-5 justify-between items-center text-left md:text-right md:flex-row">
       <p className=" font-medium">
         This project is built for testing and educational purposes !
       </p>
 
-      <p>
+      <p className=" w-full md:w-3/12 ">
         Built by{" "}
         <Link
           className=" underline"

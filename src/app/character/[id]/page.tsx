@@ -38,8 +38,6 @@ const page = async ({ params: { id } }: Props) => {
       {error === "" && characterPageData?.data && (
         <CharacterPage characterData={characterPageData?.data.characterData} />
       )}
-
-      {/* <TaskIntro /> */}
     </main>
   );
 };

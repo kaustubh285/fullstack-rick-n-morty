@@ -4,13 +4,14 @@ import Link from "next/link";
 
 import React from "react";
 import Header from "../characterPage/Header";
+import Footer from "../Footer";
 
 type Props = {
   characterData: ICharacter;
 };
 const CharacterPage = ({ characterData }: Props) => {
   return (
-    <div className="z-50 p-5 md:px-10 w-full overflow-y-scroll ">
+    <div className="z-50 p-5 pb-0 md:px-10 w-full overflow-y-scroll ">
       <Header />
 
       <div className="flex flex-col space-y-6 md:flex-row md:space-x-6 md:space-y-0 md:px-9 pb-10 md:pb-20 pt-5 text-shadow ">
@@ -85,6 +86,8 @@ const CharacterPage = ({ characterData }: Props) => {
           }
         </p>
       </div>
+
+      <Footer />
     </div>
   );
 };
