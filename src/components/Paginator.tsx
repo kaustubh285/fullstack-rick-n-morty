@@ -28,13 +28,14 @@ const Paginator = ({ info, currentPage }: Props) => {
 
   return (
     <>
-      <div className=' flex justify-evenly items-center md:w-3/12 w-4/6 mx-auto'>
+      <div className=" flex justify-evenly items-center md:w-3/12 w-4/6 mx-auto">
         <Link
           href={`/?page=${currentPage - 1}`}
           className={
             (info?.prev == null && `pointer-events-none bg-slate-500`) +
             `  disabled:cursor-default cursor-pointer p-3 bg-gray-300 hover:bg-slate-400 rounded-lg`
-          }>
+          }
+        >
           {"<"}
         </Link>
         <div>{currentPage}</div>
@@ -44,12 +45,13 @@ const Paginator = ({ info, currentPage }: Props) => {
           className={
             (info?.next == null && `pointer-events-none bg-slate-500`) +
             ` disabled:cursor-default cursor-pointer p-3 bg-gray-300 hover:bg-slate-400 rounded-lg`
-          }>
+          }
+        >
           {">"}
         </Link>
       </div>
 
-      <div className='hidden md:flex mx-auto space-x-2 pb-12'>
+      <div className="flex mx-auto space-x-2 pb-5">
         {pageNumbers.map((pgNo) => (
           <div
             key={pgNo}
@@ -57,8 +59,10 @@ const Paginator = ({ info, currentPage }: Props) => {
             className={
               (pgNo === currentPage
                 ? " scale-110 border-slate-700 border-2 "
-                : "cursor-pointer") + `  bg-gray-300 p-2 shadow-md rounded-md`
-            }>
+                : "cursor-pointer hover:bg-slate-400") +
+              `  bg-gray-300 p-2 shadow-md rounded-md `
+            }
+          >
             {pgNo}
           </div>
         ))}

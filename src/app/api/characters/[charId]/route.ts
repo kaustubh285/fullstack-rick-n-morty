@@ -39,7 +39,7 @@ async function getLocationData(locationURL: string): Promise<ILocation> {
 }
 
 async function getEpisodeData(
-  charData: ICharacterComplete
+  charData: ICharacterComplete,
 ): Promise<IEpisode[]> {
   const episodeData = await Promise.all(
     charData.episode.map(async (episodeUrl) => {
@@ -53,7 +53,7 @@ async function getEpisodeData(
         episode: episodeData.episode,
         noOfCharacters: episodeData.characters.length,
       };
-    })
+    }),
   );
 
   return episodeData;
@@ -61,28 +61,47 @@ async function getEpisodeData(
 
 export async function GET(req: Request, { params: { charId } }: Props) {
   const res: Response = await fetch(
-    `${process.env.DATA_SOURCE_URL}/character/${charId}`
-  );
-  const characterData: ICharacterComplete = await res.json();
-
-  const locationData: ILocation = await getLocationData(
-    characterData.location.url
+    `${process.env.DATA_SOURCE_URL}/character/${charId}`,
   );
 
-  const originData: ILocation = await getLocationData(characterData.origin.url);
+  if (res.ok) {
+    const characterData: ICharacterComplete = await res.json();
 
-  const episodeData: IEpisode[] = await getEpisodeData(characterData);
+    const locationData: ILocation = await getLocationData(
+      characterData.location.url,
+    );
 
-  const finalData: ICharacter = {
-    id: characterData.id,
-    name: characterData.name,
-    status: characterData.status,
-    species: characterData.species,
-    gender: characterData.gender,
-    avatar: characterData.image || "",
-    origin: originData,
-    episodes: episodeData,
-    location: locationData,
-  };
-  return NextResponse.json(finalData);
+    const originData: ILocation = await getLocationData(
+      characterData.origin.url,
+    );
+
+    const episodeData: IEpisode[] = await getEpisodeData(characterData);
+
+    const finalData: ICharacter = {
+      id: characterData.id,
+      name: characterData.name,
+      status: characterData.status,
+      species: characterData.species,
+      gender: characterData.gender,
+      avatar: characterData.image || "",
+      origin: originData,
+      episodes: episodeData,
+      location: locationData,
+    };
+    return NextResponse.json({
+      data: {
+        characterData: finalData,
+      },
+    });
+  } else {
+    const characterData: { error: string } = await res.json();
+
+    return NextResponse.json({
+      error: {
+        status: characterData.error,
+        statusCode: 404,
+        message: "Character Not Found!!",
+      },
+    });
+  }
 }
