@@ -1,4 +1,9 @@
-import { ICharacterPageData, IPageData } from "@/types/types";
+import {
+  ICharacter,
+  ICharacterCore,
+  ICharacterPageData,
+  IPageData,
+} from "@/types/types";
 
 export const getPageData = async (
   page: number,
@@ -48,4 +53,21 @@ export const getCharacterData = async (
     setICharacterPageData(characterApiRes);
     setLoading(false);
   }
+};
+
+export const filterNonMortys = (
+  characters: ICharacterCore[],
+): ICharacterCore[] => {
+  return characters.filter((character) => {
+    const nameLowerCase = character.name.toLowerCase();
+    return (
+      nameLowerCase.includes("morty") &&
+      !nameLowerCase.includes("interviewer") &&
+      !nameLowerCase.includes("father-in-law") &&
+      !nameLowerCase.includes("mother-in-law") &&
+      !nameLowerCase.includes("girlfriend") &&
+      !nameLowerCase.includes("lawyer")
+      // Add more conditions as needed for other Morty variants to exclude
+    );
+  });
 };

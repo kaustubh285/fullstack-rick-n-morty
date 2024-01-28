@@ -1,3 +1,4 @@
+import { filterNonMortys } from "@/lib/character";
 import { ICharacterComplete, ICharacterCore } from "@/types/types";
 
 import { NextResponse } from "next/server";
@@ -30,8 +31,10 @@ export async function GET(req: Request, { params: { page } }: Props) {
     return response;
   }
 
+  // character.name.toLowerCase().includes("morty’s")
+
   // Mapping the character data to the core structure
-  const completePageData: ICharacterCore[] = characterData.results.map(
+  let completePageData: ICharacterCore[] = characterData.results.map(
     (character: ICharacterComplete) => {
       return {
         id: character.id,
@@ -43,6 +46,8 @@ export async function GET(req: Request, { params: { page } }: Props) {
       };
     },
   );
+
+  completePageData = filterNonMortys(completePageData);
 
   response = NextResponse.json({
     data: {
