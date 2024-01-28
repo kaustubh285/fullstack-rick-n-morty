@@ -7,7 +7,7 @@ type Props = {
 
 const Header = ({ source }: Props) => {
   return (
-    <div className=" text-center md:text-left space-y-2 pb-16">
+    <div className=" text-center md:text-left space-y-2 ">
       <p className=" text-4xl font-semibold">Rick and Morty</p>
 
       {/* The source searchParam passed can be used here to navigate back to where the user came to the current page from */}

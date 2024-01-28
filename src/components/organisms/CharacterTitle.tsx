@@ -13,7 +13,7 @@ const CharacterTitle = ({ characterData }: Props) => {
         alt={""}
         height={200}
         width={200}
-        className=" w-4/5 mx-auto md:mx-0 md:w-56 rounded-full bg-gray-300"
+        className=" max-w-xs w-3/5 md:max-w-sm mx-auto md:mx-0 md:w-56 rounded-full bg-gray-300"
       />
       <div className="text-center md:text-left md:pt-5">
         <p className="text-5xl font-semibold pb-4 text-shadow">

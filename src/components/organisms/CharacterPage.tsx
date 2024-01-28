@@ -13,6 +13,7 @@ import { getCharacterData } from "@/lib/character";
 import CharacterTitle from "./CharacterTitle";
 import CharacterLocation from "./CharacterLocation";
 import CharacterEpisode from "./CharacterEpisode";
+import ContentWrapper from "../ContentWrapper";
 
 type Props = {
   id: number;
@@ -38,14 +39,7 @@ const CharacterPage = ({ id, source }: Props) => {
   }, [id]);
 
   return (
-    <div className="p-5 pb-0 md:px-10 w-full overflow-y-scroll relative min-h-screen">
-      <Image
-        src="/bgImage.jpeg"
-        alt="RnMBg"
-        width={200}
-        height={200}
-        className=" bg-gray-200 w-full md:h-2/5 h-2/5 object-cover absolute top-0 left-0 right-0 bottom-56 -z-10  opacity-40"
-      />
+    <ContentWrapper displayHeader={false} displayFooter={true}>
       <Header source={source} />
 
       {/* Conditional rendering */}
@@ -70,12 +64,11 @@ const CharacterPage = ({ id, source }: Props) => {
               <CharacterTitle characterData={characterData} />
               <CharacterLocation characterData={characterData} />
               <CharacterEpisode characterData={characterData} />
-              <Footer />
             </>
           )}
         </>
       )}
-    </div>
+    </ContentWrapper>
   );
 };
 
