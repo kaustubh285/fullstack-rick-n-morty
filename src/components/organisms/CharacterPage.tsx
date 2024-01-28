@@ -26,7 +26,7 @@ const CharacterPage = ({ id, source }: Props) => {
   // If data is present,
   //      error will be undefined
   // And vice-a-versa
-  const [characterPageData, setICharacterPageData] = useState<
+  const [characterPageData, setCharacterPageData] = useState<
     ICharacterPageData | { data: undefined; error: undefined }
   >({ data: undefined, error: undefined });
 
@@ -34,11 +34,11 @@ const CharacterPage = ({ id, source }: Props) => {
   const { characterData } = characterPageData.data || {};
 
   useEffect(() => {
-    getCharacterData(id, setLoading, setError, setICharacterPageData);
+    getCharacterData(id, setLoading, setError, setCharacterPageData);
   }, [id]);
 
   return (
-    <div className="p-5 pb-0 md:px-10 w-full overflow-y-scroll relative">
+    <div className="p-5 pb-0 md:px-10 w-full overflow-y-scroll relative min-h-screen">
       <Image
         src="/bgImage.jpeg"
         alt="RnMBg"
@@ -51,9 +51,12 @@ const CharacterPage = ({ id, source }: Props) => {
       {/* Conditional rendering */}
       {/* If not Loading=> if not Error=> display data */}
       {loading ? (
-        <>
-          <CharacterSkeleton />
-        </>
+        <div className=" absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center">
+          <p className=" text-2xl pt-52 md:pt-20 text-shadow">
+            {" "}
+            Please wait while we fetch the information ...
+          </p>
+        </div>
       ) : (
         <>
           {error !== "" && (
