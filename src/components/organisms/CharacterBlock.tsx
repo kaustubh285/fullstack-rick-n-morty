@@ -35,6 +35,7 @@ const CharacterBlock = ({ char, currentPage }: Props) => {
         </p>
       </div>
 
+      {/* including current page number as the source enables us to come back to the source page from the character page */}
       <Link
         scroll={true}
         href={`/character/${char.id}?source=${currentPage}`}

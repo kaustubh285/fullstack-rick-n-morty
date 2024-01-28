@@ -1,6 +1,7 @@
 import React from "react";
 
 const CharacterSkeleton = () => {
+  // Simple recreated view of the page with Lorem Ipsum data fo similar layout
   return (
     <>
       <div className="flex flex-col space-y-6 md:flex-row md:space-x-6 md:space-y-0 md:px-9 pb-10 md:pb-20 pt-5 text-shadow ">

@@ -8,18 +8,14 @@ type Props = {
   };
 };
 
-// export default async function handler(
-//   req: Request,
-//   resp: Response,
-//   { params: { page } }: Props
-// ) {
 export async function GET(req: Request, { params: { page } }: Props) {
   let response;
   const res: Response = await fetch(
-    `${process.env.DATA_SOURCE_URL}/character/?page=${page}&name=morty&status=alive`
+    `${process.env.DATA_SOURCE_URL}/character/?page=${page}&name=morty&status=alive`,
   );
   const characterData = await res.json();
 
+  // If an error occured in the data, return in a format that can be handled by the frontend
   if (characterData.error) {
     response = NextResponse.json({
       error: {
@@ -34,6 +30,7 @@ export async function GET(req: Request, { params: { page } }: Props) {
     return response;
   }
 
+  // Mapping the character data to the core structure
   const completePageData: ICharacterCore[] = characterData.results.map(
     (character: ICharacterComplete) => {
       return {
@@ -44,7 +41,7 @@ export async function GET(req: Request, { params: { page } }: Props) {
         gender: character.gender,
         avatar: character.image,
       };
-    }
+    },
   );
 
   response = NextResponse.json({

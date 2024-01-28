@@ -12,11 +12,19 @@ import Footer from "./Footer";
 import Image from "next/image";
 import { getPageData } from "@/lib/character";
 const HomePage = () => {
+  // State to manage loading state, Error state (stored as a string where empty sting indicates no error)
   const [loading, setLoading] = React.useState<boolean>(true);
   const [error, setError] = React.useState<string>("");
+
+  // Search params lets us get the parameters included with the url after the ?
+  // Used to get the current Page number for pagination
   const searchParams = useSearchParams();
   const currentPageParam = searchParams.get("page");
   const currentPage = currentPageParam ? parseInt(currentPageParam) : 1;
+
+  // If data is present,
+  //      error will be undefined
+  // And vice-a-versa
   const [pageData, setPageData] = React.useState<
     PageData | { data: undefined; error: undefined }
   >({
@@ -24,6 +32,7 @@ const HomePage = () => {
     error: undefined,
   });
 
+  // Paginated data fetch based on the current page value from the searchParams
   useEffect(() => {
     getPageData(currentPage, setLoading, setError, setPageData);
   }, [currentPage]);
@@ -42,12 +51,11 @@ const HomePage = () => {
           Rick and Morty
         </p>
       </div>
-      {error &&
-        (currentPage >= 2 ? (
-          <Error message="Not Enough Characters" />
-        ) : (
-          <Error message={error} />
-        ))}
+
+      {/* render on Error */}
+      {error && <Error message={error} />}
+
+      {/* will render only if error an empty string, i.e data is present */}
       {!error && (
         <>
           {loading && <GridSkeleton />}

@@ -15,7 +15,9 @@ type Props = {
   };
 };
 
+// The same function is used to get information on the origin, as well as the location of a character
 async function getLocationData(locationURL: string): Promise<ILocation> {
+  // If the location URL is empty, return default unknown location data
   if (locationURL.length === 0 || locationURL === "") {
     return {
       id: 0,
@@ -41,6 +43,7 @@ async function getLocationData(locationURL: string): Promise<ILocation> {
 async function getEpisodeData(
   charData: ICharacterComplete,
 ): Promise<IEpisode[]> {
+  // Fetching episode data for each episode URL in parallel
   const episodeData = await Promise.all(
     charData.episode.map(async (episodeUrl) => {
       const response = await fetch(episodeUrl);
@@ -67,6 +70,7 @@ export async function GET(req: Request, { params: { charId } }: Props) {
   if (res.ok) {
     const characterData: ICharacterComplete = await res.json();
 
+    // Featching location, origin and episode data for the character in the required format
     const locationData: ILocation = await getLocationData(
       characterData.location.url,
     );
@@ -77,6 +81,7 @@ export async function GET(req: Request, { params: { charId } }: Props) {
 
     const episodeData: IEpisode[] = await getEpisodeData(characterData);
 
+    // Final data structure
     const finalData: ICharacter = {
       id: characterData.id,
       name: characterData.name,
@@ -96,11 +101,12 @@ export async function GET(req: Request, { params: { charId } }: Props) {
   } else {
     const characterData: { error: string } = await res.json();
 
+    // Error response in the format which can be handled by the frontend
     return NextResponse.json({
       error: {
         status: characterData.error,
         statusCode: 404,
-        message: "Character Not Found!!",
+        message: characterData.error,
       },
     });
   }

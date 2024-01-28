@@ -8,10 +8,13 @@ export const getPageData = async (
     React.SetStateAction<PageData | { data: undefined; error: undefined }>
   >,
 ) => {
+  // Initializing loading as true on function call so user can see the loading screen
   setLoading(true);
   const data = await fetch(`/api/characters/page/${page}`).then((res) =>
     res.json(),
   );
+
+  // set data / error and end loading
   if (data.error) {
     setError(data.error.message);
   } else {
@@ -30,13 +33,15 @@ export const getCharacterData = async (
     >
   >,
 ) => {
+  // Initializing loading as true on function call so user can see the loading screen
   setLoading(true);
   const characterApiRes = await fetch(`/api/characters/${id}`).then((res) =>
     res.json(),
   );
 
-  console.log(characterApiRes);
+  // set data / error and end loading
   if (characterApiRes.error) {
+    setLoading(false);
     setError(characterApiRes.error.message);
   } else {
     setError("");
