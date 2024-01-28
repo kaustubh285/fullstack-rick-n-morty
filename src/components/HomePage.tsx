@@ -2,7 +2,7 @@
 
 import React, { Suspense, useEffect } from "react";
 import mockData from "../../mockdata/allCharacters.json";
-import { ICharacterCore, PageData } from "@/types/types";
+import { ICharacterCore, IPageData } from "@/types/types";
 import CharacterBlock from "./organisms/CharacterBlock";
 import Paginator from "./Paginator";
 import GridSkeleton from "./Loading/GridSkeleton";
@@ -26,7 +26,7 @@ const HomePage = () => {
   //      error will be undefined
   // And vice-a-versa
   const [pageData, setPageData] = React.useState<
-    PageData | { data: undefined; error: undefined }
+    IPageData | { data: undefined; error: undefined }
   >({
     data: undefined,
     error: undefined,
@@ -38,7 +38,7 @@ const HomePage = () => {
   }, [currentPage]);
 
   return (
-    <div className="flex flex-col z-50 overflow-y-scroll w-screen pt-24 space-y-12 md:px-20 px-6  md:pb-0 relative ">
+    <div className="flex flex-col z-50 overflow-y-scroll w-screen space-y-12 md:px-20 px-6 md:pb-0 relative ">
       <Image
         src="/bgImage.jpeg"
         alt="RnMBg"
@@ -49,6 +49,9 @@ const HomePage = () => {
       <div>
         <p className="text-4xl font-semibold italic text-shadow">
           Rick and Morty
+        </p>
+        <p className="text-lg italic text-shadow">
+          (MortyDex - Explore Mortys Across Dimensions)
         </p>
       </div>
 

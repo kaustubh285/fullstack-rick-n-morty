@@ -1,11 +1,11 @@
-import { CharacterPageData, PageData } from "@/types/types";
+import { ICharacterPageData, IPageData } from "@/types/types";
 
 export const getPageData = async (
   page: number,
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
   setError: React.Dispatch<React.SetStateAction<string>>,
   setPageData: React.Dispatch<
-    React.SetStateAction<PageData | { data: undefined; error: undefined }>
+    React.SetStateAction<IPageData | { data: undefined; error: undefined }>
   >,
 ) => {
   // Initializing loading as true on function call so user can see the loading screen
@@ -27,9 +27,9 @@ export const getCharacterData = async (
   id: number,
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
   setError: React.Dispatch<React.SetStateAction<string>>,
-  setCharacterPageData: React.Dispatch<
+  setICharacterPageData: React.Dispatch<
     React.SetStateAction<
-      CharacterPageData | { data: undefined; error: undefined }
+      ICharacterPageData | { data: undefined; error: undefined }
     >
   >,
 ) => {
@@ -45,7 +45,7 @@ export const getCharacterData = async (
     setError(characterApiRes.error.message);
   } else {
     setError("");
-    setCharacterPageData(characterApiRes);
+    setICharacterPageData(characterApiRes);
     setLoading(false);
   }
 };

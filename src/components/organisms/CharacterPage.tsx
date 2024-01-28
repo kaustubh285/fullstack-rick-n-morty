@@ -2,7 +2,7 @@
 import { ICharacter } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
-import { CharacterPageData } from "@/types/types";
+import { ICharacterPageData } from "@/types/types";
 
 import React, { useEffect, useState } from "react";
 import Header from "../characterPage/Header";
@@ -26,15 +26,15 @@ const CharacterPage = ({ id, source }: Props) => {
   // If data is present,
   //      error will be undefined
   // And vice-a-versa
-  const [characterPageData, setCharacterPageData] = useState<
-    CharacterPageData | { data: undefined; error: undefined }
+  const [characterPageData, setICharacterPageData] = useState<
+    ICharacterPageData | { data: undefined; error: undefined }
   >({ data: undefined, error: undefined });
 
   // If characterPageData has an error instead of data, then an empty object helps us avoid renderring errors
   const { characterData } = characterPageData.data || {};
 
   useEffect(() => {
-    getCharacterData(id, setLoading, setError, setCharacterPageData);
+    getCharacterData(id, setLoading, setError, setICharacterPageData);
   }, [id]);
 
   return (

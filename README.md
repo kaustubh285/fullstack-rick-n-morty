@@ -1,37 +1,65 @@
-# Collagerie Fullstack Tech Test
+# fullstack-rick-n-morty
 
-## The Challenge
-The challenge is split into two parts FE and BE and about we recommend spending 2-3 hours on it, we do not expect everyone to complete both parts of the task, however please try to attempt both parts of the exercise. You can attempt them in any order however we would recommend starting with the BE task first. We would like to see your approach and way of working over the task being "complete".
+### MortyDex - Explore Mortys Across Dimensions
 
-The exercise is very open on purpose, we want to see how you tackle building something from scratch yourself and what tech you reach for to accomplish i
+Fullstack-rick-n-morty:MortyDex is a Next.js project that allows users to explore various Mortys from different dimensions in the Rick and Morty universe. The project functions similarly to a Pokedex, offering a paginated grid of alive Mortys and detailed information page about each, including their name, origin, location details, and episode details etc.
 
-We use NextJS, both the BE and FE tasks can be accomplished in the same application boilerplate. We have set up the project to utilise the app directory setup however feel free to change this if you need to.
+### Getting Started
 
-### BE Task
-Create a custom rest API to pre-filter all required data needed. The required data includes getting all Alive, Morty characters along with all of their associated data types Origin, Location and Episode data from the Rick and Morty API. https://rickandmortyapi.com/. Please ensure you read the docs thoroughly https://rickandmortyapi.com/documentation. We would prefer the use of the GraphqlQL API over the RestAPI alternative.
+Follow these steps to set up and run the project locally:
 
-The interfaces in the codebase will show you what the data structure must look like, if you need to extend them, feel free! However, the original structure must stay **unchanged**.
+1. **Clone the Repository:**
 
-### FE Task
-Build a simple UI to list all characters using the basic wireframes provided. There is mockdata provided for the character listing page and for the individual character page if the BE Task is not complete however we would encourage you to use your own BE API.
+   ```bash
+   git clone https://github.com/kaustubh285/fullstack-rick-n-morty.git
+   cd fullstack-rick-n-morty
+   ```
 
-Please ensure your work checks all the points below – it’s what we will be looking out for
-- Your chosen method for fetching and aggregating data. (If the BE task is completed, you should use the BE API made)
-- Chosen folder structure
-- The layout should be based on the wireframes provided.
-- Final work (whether complete or in part) should be submitted in a git repository. (ideally we would like to see a commit history - conventional commits are recommended). With a README.md file, so we can run the app locally and test it ourselves.
-- Deploy the app to a service like Vercel or Netlify in whatever state it's left in.
-- **For the BE task DO NOT use the Rick and Morty JavaScript library. We want to see how you architect aggregating data**.
-- The site should be built using HTML, CSS and JavaScript (TypeScript), and as far as styling is concerned: SCSS, PostCSS, CSS Modules and Tailwind are all acceptable. (we have pre-baked in tailwind)
-- The FE task should be built using responsive techniques.
+2. **Install Dependencies:**
 
-### Taking things further:
-(Not a requirement but if you think it will help us assess your skill level and passion). If you have the time, here are some suggestions to enhance the app:
+   ```bash
+   yarn install
+   ```
 
-- Add to the eslint config
-- Add prettier and a config
-- Add CI tasks, github actions or similar
-- Add pre-commit hooks (husky, lint-staged etc)
-- Unit tests: We have somewhat setup vitest + react-testing-library - however it's broken at the moment (on purpose), so you will need to fix it and add a test.
-- Accessibility improvements
-- Pagination if required?
+3. **Run the Development Server:**
+
+   ```bash
+   yarn run dev
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) in your browser to view!
+
+### Project Structure
+
+- `src/app/`: Contains Next.js pages for different routes.
+- `src/components/`: Reusable React components.
+- `src/types/`: Includes the TypeScript type definitions.
+- `src/lib/`: Contains helper functions.
+- `src/app/api`: Contains routes for the Next.js backend APIs.
+- `public/`: Static assets.
+
+### Project Workflow
+
+1. The frontend extracts the page number from the URL (page 1 if none exists) and makes a request to the backend for page data.
+2. The backend communicates with the Rick and Morty API to fetch alive Morty s data.
+3. The backend formats the data and sends it to the frontend.
+4. The frontend then displays a paginated grid of alive Mortys, View Profile shows the detailed page of the Morty.
+
+### Deployment
+
+The project is hosted on Vercel and is automatically deployed when changes are pushed to the master branch.
+
+Live version accessible here : [https://fullstack-rick-n-morty.vercel.app/](https://fullstack-rick-n-morty.vercel.app/) !
+
+### Code Quality and Pre-commit Hooks
+
+This project maintains code quality through the use of pre-commit hooks. `husky` and `lint-staged` are set up to run before each commit, ensuring that code adheres to the established linting rules.
+
+### Technologies Used
+
+- **Next.js**
+- **TypeScript**
+- **TailwindCSS**
+- **Vercel**
+
+Embark on your Morty journey with Fullstack-rick-n-morty: MortyDex! 🌌🚀
