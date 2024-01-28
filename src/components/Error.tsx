@@ -16,17 +16,18 @@ const Error = ({ message }: Props) => {
         height={400}
         width={400}
         alt={"error"}
-        className=" w-full md:w-2/5 rounded-lg"
+        className=" w-full lg:w-4/12 max-w-sm md:max-w-md aspect-square rounded-lg"
       />
 
-      <p className=" text-3xl bg-red-200 text-red-700 p-2 rounded-lg">
+      <p className="text-2xl md:text-3xl bg-red-200 text-red-700 p-2 rounded-lg">
         {message ? message : "Data Not Found!"} !
       </p>
 
       {/* Navigate back to home page */}
       <div className=" py-2">
+        {/* Here we use window.location.href to reload the page since router.push is unable to refresh the page  */}
         <p
-          onClick={() => router.push("/?page=1")}
+          onClick={() => (window.location.href = "/?page=1")}
           className="text-lg underline cursor-pointer "
         >
           Head back to square 1?

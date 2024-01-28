@@ -6,7 +6,7 @@ import React from "react";
 // Custom loading page
 const Loading = () => {
   return (
-    <ContentWrapper>
+    <ContentWrapper displayHeader={true} displayFooter={true}>
       <div className=" w-full h-full  flex justify-center items-center">
         <p className=" text-2xl pt-52 md:pt-20 text-shadow">
           {" "}

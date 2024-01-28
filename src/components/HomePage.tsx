@@ -39,7 +39,7 @@ const HomePage = () => {
   }, [currentPage]);
 
   return (
-    <ContentWrapper>
+    <ContentWrapper displayHeader={true} displayFooter={true}>
       {/* render on Error */}
       {error && <Error message={error} />}
 
