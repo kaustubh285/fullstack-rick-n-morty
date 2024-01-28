@@ -5,9 +5,10 @@ import React from "react";
 
 type Props = {
   char: ICharacterCore;
+  currentPage: number;
 };
 
-const CharacterBlock = ({ char }: Props) => {
+const CharacterBlock = ({ char, currentPage }: Props) => {
   return (
     <div
       className="flex flex-col items-start justify-start text-wrap space-y-3 pb-3 md:pb-9 "
@@ -34,7 +35,12 @@ const CharacterBlock = ({ char }: Props) => {
         </p>
       </div>
 
-      <Link href={`/character/${char.id}`} className=" w-full">
+      {/* including current page number as the source enables us to come back to the source page from the character page */}
+      <Link
+        scroll={true}
+        href={`/character/${char.id}?source=${currentPage}`}
+        className=" w-full"
+      >
         <button className="bg-gray-300 w-full  py-3 shadow-lg rounded-md hover:bg-slate-400">
           View Profile
         </button>

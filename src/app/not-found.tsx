@@ -2,6 +2,7 @@ import Error from "@/components/Error";
 import Image from "next/image";
 import React from "react";
 
+// Custom 404 page
 const NotFound = () => {
   return (
     <main className="text-center flex flex-col items-center justify-start gap-5 overflow-hidden h-screen">

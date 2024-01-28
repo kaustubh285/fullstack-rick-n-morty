@@ -1,15 +1,16 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 type Props = {
   message?: string;
 };
 const Error = ({ message }: Props) => {
-  let defaultPage = 1;
+  const router = useRouter();
   return (
     <div className=" flex flex-col justify-center items-center">
+      {/* Error image */}
       <Image
         src={"/error.jpeg"}
         height={400}
@@ -22,9 +23,10 @@ const Error = ({ message }: Props) => {
         {message ? message : "Data Not Found!"} !
       </p>
 
+      {/* Navigate back to home page */}
       <div className=" py-2">
         <p
-          onClick={() => (window.location.href = "/?page=1")}
+          onClick={() => router.push("/?page=1")}
           className="text-lg underline cursor-pointer "
         >
           Head back to square 1?

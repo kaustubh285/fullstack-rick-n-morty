@@ -2,6 +2,7 @@ import GridSkeleton from "@/components/Loading/GridSkeleton";
 import Image from "next/image";
 import React from "react";
 
+// Custom loading page
 const Loading = () => {
   return (
     <main className="text-center flex flex-col items-center justify-start gap-5 overflow-hidden h-screen">

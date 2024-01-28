@@ -50,7 +50,7 @@ export interface ILocationApiData {
   dimension: string;
 }
 
-export interface PageData {
+export interface IPageData {
   data?: {
     characters: ICharacterCore[];
     info: {
@@ -66,7 +66,7 @@ export interface PageData {
   };
 }
 
-export interface CharacterPageData {
+export interface ICharacterPageData {
   data?: {
     characterData: ICharacter;
   };
