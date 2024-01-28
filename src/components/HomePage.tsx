@@ -10,6 +10,7 @@ import { useSearchParams } from "next/navigation";
 import Error from "./Error";
 import Footer from "./Footer";
 import Image from "next/image";
+import { getPageData } from "@/lib/character";
 const HomePage = () => {
   const [loading, setLoading] = React.useState<boolean>(true);
   const [error, setError] = React.useState<string>("");
@@ -24,21 +25,8 @@ const HomePage = () => {
   });
 
   useEffect(() => {
-    fetchPageData(currentPage);
+    getPageData(currentPage, setLoading, setError, setPageData);
   }, [currentPage]);
-
-  const fetchPageData = async (page: number) => {
-    setLoading(true);
-    const data = await fetch(`/api/characters/page/${page}`).then((res) =>
-      res.json(),
-    );
-    if (data.error) {
-      setError(data.error.message);
-    } else {
-      setPageData(data);
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="flex flex-col z-50 overflow-y-scroll w-screen pt-24 space-y-12 md:px-20 px-6  md:pb-0 relative ">
@@ -64,16 +52,17 @@ const HomePage = () => {
         <>
           {loading && <GridSkeleton />}
           {!loading && (
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-14 lg:grid-cols-5 lg:gap-10 ">
-              {pageData.data?.characters.map((char: ICharacterCore) => (
-                <Suspense fallback={<div>wait...</div>} key={char.id}>
-                  <CharacterBlock char={char} currentPage={currentPage} />
-                </Suspense>
-              ))}
-            </div>
-          )}
-          {!loading && (
-            <Paginator info={pageData.data?.info} currentPage={currentPage} />
+            <>
+              <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-14 lg:grid-cols-5 lg:gap-10 ">
+                {pageData.data?.characters.map((char: ICharacterCore) => (
+                  <Suspense fallback={<div>wait...</div>} key={char.id}>
+                    <CharacterBlock char={char} currentPage={currentPage} />
+                  </Suspense>
+                ))}
+              </div>
+
+              <Paginator info={pageData.data?.info} currentPage={currentPage} />
+            </>
           )}
         </>
       )}

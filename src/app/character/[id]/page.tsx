@@ -1,9 +1,7 @@
 import Error from "@/components/Error";
 import CharacterPage from "@/components/organisms/CharacterPage";
-import { getCharacterData } from "@/lib/character";
-import { CharacterPageData } from "@/types/types";
 
-import React from "react";
+import React, { useState } from "react";
 export const revalidate = 3600;
 
 type Props = {
@@ -15,19 +13,10 @@ type Props = {
   };
 };
 
-const page = async ({ params: { id }, searchParams: { source } }: Props) => {
-  const characterPageData = await getCharacterData(id);
-
-  const characterData = characterPageData.data?.characterData || null;
-  const error = characterPageData.error?.message || null;
-
+const page = ({ params: { id }, searchParams: { source } }: Props) => {
   return (
     <main className="text-center flex flex-col items-center justify-start gap-5 ">
-      <CharacterPage
-        characterData={characterData}
-        error={error}
-        source={source}
-      />
+      <CharacterPage id={id} source={source} />
     </main>
   );
 };
